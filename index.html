@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FRAIJO LABORATORY</title>
+  <meta name="description" content="Independent aerospace concepts. Vehicle studies with CFD, CBAERO, and FEA." />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #07080a;
+      --fg: #e8e6df;
+      --muted: rgba(232,230,223,.62);
+      --line: rgba(232,230,223,.28);
+      --accent: #c4a574;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: Barlow, sans-serif;
+      line-height: 1.45;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1140px, calc(100% - 40px)); margin: 0 auto; }
+    nav {
+      position: fixed; inset: 0 0 auto; z-index: 20;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 24px;
+      background: linear-gradient(#07080a, transparent);
+      font-family: "Barlow Condensed", sans-serif;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+    nav .links { display: flex; gap: 22px; }
+    nav a:hover { color: var(--accent); }
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: flex-end;
+      padding: 0 0 80px;
+      background:
+        linear-gradient(to top, #07080a 0%, rgba(7,8,10,.35) 45%, rgba(7,8,10,.2) 100%),
+        url("https://images.unsplash.com/photo-1457364887197-9150188c107b?auto=format&fit=crop&w=2400&q=80") center 30%/cover no-repeat;
+    }
+    .kicker {
+      font-family: "Barlow Condensed", sans-serif;
+      letter-spacing: .28em; text-transform: uppercase;
+      font-size: 12px; color: var(--accent); margin-bottom: 14px;
+    }
+    h1, h2, h3, .caps {
+      font-family: "Barlow Condensed", sans-serif;
+      text-transform: uppercase; letter-spacing: .06em; font-weight: 700;
+    }
+    h1 { font-size: clamp(48px, 9vw, 96px); line-height: .9; max-width: 12ch; }
+    h2 { font-size: clamp(28px, 4vw, 44px); line-height: .95; margin: 8px 0 22px; }
+    .lede { max-width: 46ch; color: var(--muted); margin-top: 16px; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 42px; padding: 0 18px;
+      border: 1px solid var(--line);
+      font-family: "Barlow Condensed", sans-serif;
+      letter-spacing: .16em; text-transform: uppercase; font-size: 13px;
+    }
+    .btn:hover { border-color: var(--accent); color: var(--accent); }
+    section { padding: 84px 0; border-top: 1px solid rgba(232,230,223,.08); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .card {
+      border: 1px solid rgba(232,230,223,.12);
+      min-height: 280px; padding: 28px;
+      background: #0c0d10;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .card span { color: var(--accent); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
+    .specs {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      background: rgba(232,230,223,.12); margin: 28px 0;
+    }
+    .specs div { background: #07080a; padding: 16px 12px; }
+    .specs b { display: block; font-size: 22px; font-family: "Barlow Condensed", sans-serif; }
+    .specs i { font-style: normal; color: var(--muted); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+    iframe.chart { width: 100%; height: 380px; border: 1px solid rgba(232,230,223,.12); background: #000; }
+    .stack { display: grid; gap: 48px; }
+    footer {
+      padding: 28px 0 48px; color: var(--muted);
+      display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      font-family: "Barlow Condensed", sans-serif; letter-spacing: .12em; text-transform: uppercase; font-size: 12px;
+    }
+    .note { color: var(--muted); font-size: 14px; max-width: 70ch; }
+    @media (max-width: 800px) {
+      .grid-2, .specs { grid-template-columns: 1fr 1fr; }
+      nav .links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#top">Fraijo Lab</a>
+    <div class="links">
+      <a href="#systems">Systems</a>
+      <a href="#analysis">Analysis</a>
+      <a href="#data">Data</a>
+      <a href="https://github.com/danielfraijo">GitHub</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="wrap">
+      <div class="kicker">Independent concept studies</div>
+      <h1>Flight vehicles. Measured.</h1>
+      <p class="lede">Missile-class and unmanned air vehicle concepts with public analysis packs: CFD force maps, CBAERO heating, and FEA load cases. Replace the placeholder runs with your own files.</p>
+      <div class="row">
+        <a class="btn" href="#systems">View systems</a>
+        <a class="btn" href="#analysis">Open plots</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="systems">
+    <div class="wrap">
+      <div class="kicker">01 — Concepts</div>
+      <h2>Named vehicles</h2>
+      <p class="note">Rename these. They exist so the site already looks like a product house (Tiberius / Specter pattern): one block per vehicle, then specs, then analysis.</p>
+      <div class="grid-2" style="margin-top:28px">
+        <a class="card" href="#viper">
+          <span>Air vehicle</span>
+          <h3 style="font-size:42px;margin-top:8px">Viper</h3>
+          <p class="note">Compact high-speed airframe study. Boost-glide class outer mold line.</p>
+        </a>
+        <a class="card" href="#kite">
+          <span>Unmanned system</span>
+          <h3 style="font-size:42px;margin-top:8px">Kite</h3>
+          <p class="note">Long-endurance UAV concept. Structures and aero packaged together.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="viper">
+    <div class="wrap">
+      <div class="kicker">Viper · concept</div>
+      <h2>High-speed airframe</h2>
+      <p class="note">Public-facing description only: configuration family, analysis tools used, and what the plots show. Keep seeker, payload, and manufacturing detail off this page.</p>
+      <div class="specs">
+        <div><i>Class</i><b>Air vehicle</b></div>
+        <div><i>Regime</i><b>Transonic–supersonic</b></div>
+        <div><i>Tools</i><b>CFD · CBAERO</b></div>
+        <div><i>Status</i><b>Study</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kite">
+    <div class="wrap">
+      <div class="kicker">Kite · concept</div>
+      <h2>Unmanned airframe</h2>
+      <p class="note">Structures-led concept. The FEA plot is a spar stress distribution under a pull-up case, compared with an allowable.</p>
+      <div class="specs">
+        <div><i>Class</i><b>UAV</b></div>
+        <div><i>Regime</i><b>Subsonic</b></div>
+        <div><i>Tools</i><b>FEA · CFD</b></div>
+        <div><i>Status</i><b>Study</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="analysis">
+    <div class="wrap stack">
+      <div>
+        <div class="kicker">02 — Analysis suite</div>
+        <h2>Plots from the stack you named</h2>
+        <p class="note">These charts are labeled placeholders. Swap the HTML/CSV with exports from your real CFD, CBAERO, and FEA cases. Same filenames = no code edits.</p>
+      </div>
+      <div>
+        <h3 class="caps" style="margin-bottom:10px">CFD — force coefficients vs Mach</h3>
+        <p class="note" style="margin-bottom:12px">CL and CD at alpha = 4 deg. Hover / zoom. Data: cfd-force.csv</p>
+        <iframe class="chart" src="cfd-aero.html" title="CFD coefficients"></iframe>
+      </div>
+      <div>
+        <h3 class="caps" style="margin-bottom:10px">CBAERO — aeroheating vs time</h3>
+        <p class="note" style="margin-bottom:12px">Nose stagnation and leading-edge heat flux along a notional trajectory. Data: cbaero-heat.csv</p>
+        <iframe class="chart" src="cbaero-heat.html" title="CBAERO heating"></iframe>
+      </div>
+      <div>
+        <h3 class="caps" style="margin-bottom:10px">FEA — spar von Mises</h3>
+        <p class="note" style="margin-bottom:12px">+3.0 g pull-up vs allowable. Data: fea-spar.csv</p>
+        <iframe class="chart" src="fea-spar.html" title="FEA spar stress"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="data">
+    <div class="wrap">
+      <div class="kicker">03 — Downloads</div>
+      <h2>Run files</h2>
+      <p class="note">Publish coefficients, heat-flux histories, and stress tables. Do not upload ITAR-controlled geometry, meshes, or detailed munition performance.</p>
+      <div class="row">
+        <a class="btn" href="cfd-force.csv" download>cfd-force.csv</a>
+        <a class="btn" href="cbaero-heat.csv" download>cbaero-heat.csv</a>
+        <a class="btn" href="fea-spar.csv" download>fea-spar.csv</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    <span>Fraijo Laboratory · concept studies</span>
+    <a href="https://github.com/danielfraijo">github.com/danielfraijo</a>
+  </footer>
+</body>
+</html>
