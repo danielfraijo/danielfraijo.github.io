@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VESPASIAN</title>
   <meta name="description" content="Vespasian. Concept air vehicles and analysis. Fulmen, Pilum, Contus, Aquila. Vigil is the picture." />
-  <link rel="icon" href="assets/logo-eagle.png" />
+  <link rel="icon" href="logo-eagle.png" />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -58,9 +58,10 @@
         #000;
     }
     .hero-logo {
-      position: absolute; right: 6vw; top: 18vh;
-      width: min(42vw, 520px);
-      opacity: .9;
+      position: absolute; right: 4vw; top: 12vh;
+      width: min(48vw, 560px);
+      mix-blend-mode: screen;
+      filter: contrast(1.2) brightness(1.35);
       animation: drift 14s ease-in-out infinite alternate;
     }
     @keyframes drift {
@@ -172,7 +173,7 @@
 <body>
   <nav>
     <a class="brand" href="#top">
-      <img class="eagle" src="assets/logo-eagle.png" alt="Vespasian" />
+      <img class="eagle" src="logo-eagle.png" alt="Vespasian" />
       <span>Vespasian</span>
     </a>
     <div class="links">
@@ -188,7 +189,7 @@
 
   <header class="hero" id="top">
     <div class="hero-bg"></div>
-    <img class="hero-logo" src="assets/logo-eagle.png" alt="" />
+    <img class="hero-logo" src="logo-eagle.png" alt="" />
     <div class="wrap">
       <div class="kicker">Vespasian</div>
       <h1>Vespasian</h1>
@@ -247,8 +248,8 @@
         </div>
       </div>
       <div>
-        <iframe class="chart" src="charts/cfd-aero.html" title="Fulmen CFD placeholder"></iframe>
-        <div class="row"><a class="btn" href="data/cfd-force.csv" download>Download CFD CSV</a></div>
+        <iframe class="chart" src="cfd-aero.html" title="Fulmen CFD placeholder"></iframe>
+        <div class="row"><a class="btn" href="cfd-force.csv" download>Download CFD CSV</a></div>
       </div>
     </div>
   </section>
@@ -267,8 +268,8 @@
         </div>
       </div>
       <div>
-        <iframe class="chart" src="charts/cbaero-heat.html" title="Pilum heating placeholder"></iframe>
-        <div class="row"><a class="btn" href="data/cbaero-heat.csv" download>Download CBAERO CSV</a></div>
+        <iframe class="chart" src="cbaero-heat.html" title="Pilum heating placeholder"></iframe>
+        <div class="row"><a class="btn" href="cbaero-heat.csv" download>Download CBAERO CSV</a></div>
       </div>
     </div>
   </section>
@@ -287,8 +288,8 @@
         </div>
       </div>
       <div>
-        <iframe class="chart" src="charts/cfd-aero.html" title="Contus CFD placeholder"></iframe>
-        <div class="row"><a class="btn" href="data/cfd-force.csv" download>Download CFD CSV</a></div>
+        <iframe class="chart" src="cfd-aero.html" title="Contus CFD placeholder"></iframe>
+        <div class="row"><a class="btn" href="cfd-force.csv" download>Download CFD CSV</a></div>
       </div>
     </div>
   </section>
@@ -307,8 +308,8 @@
         </div>
       </div>
       <div>
-        <iframe class="chart" src="charts/fea-spar.html" title="Aquila FEA placeholder"></iframe>
-        <div class="row"><a class="btn" href="data/fea-spar.csv" download>Download FEA CSV</a></div>
+        <iframe class="chart" src="fea-spar.html" title="Aquila FEA placeholder"></iframe>
+        <div class="row"><a class="btn" href="fea-spar.csv" download>Download FEA CSV</a></div>
       </div>
     </div>
   </section>
@@ -330,18 +331,18 @@
       </div>
       <div>
         <h3>CFD</h3>
-        <p class="note" style="margin:8px 0 12px">Force coefficients vs Mach. File: data/cfd-force.csv · view: charts/cfd-aero.html</p>
-        <iframe class="chart" src="charts/cfd-aero.html" title="CFD"></iframe>
+        <p class="note" style="margin:8px 0 12px">Force coefficients vs Mach. File: cfd-force.csv · view: cfd-aero.html</p>
+        <iframe class="chart" src="cfd-aero.html" title="CFD"></iframe>
       </div>
       <div>
         <h3>CBAERO</h3>
-        <p class="note" style="margin:8px 0 12px">Heat flux vs time. File: data/cbaero-heat.csv · view: charts/cbaero-heat.html</p>
-        <iframe class="chart" src="charts/cbaero-heat.html" title="CBAERO"></iframe>
+        <p class="note" style="margin:8px 0 12px">Heat flux vs time. File: cbaero-heat.csv · view: cbaero-heat.html</p>
+        <iframe class="chart" src="cbaero-heat.html" title="CBAERO"></iframe>
       </div>
       <div>
         <h3>FEA</h3>
-        <p class="note" style="margin:8px 0 12px">Spar stress vs span. File: data/fea-spar.csv · view: charts/fea-spar.html</p>
-        <iframe class="chart" src="charts/fea-spar.html" title="FEA"></iframe>
+        <p class="note" style="margin:8px 0 12px">Spar stress vs span. File: fea-spar.csv · view: fea-spar.html</p>
+        <iframe class="chart" src="fea-spar.html" title="FEA"></iframe>
       </div>
     </div>
   </section>
@@ -351,7 +352,7 @@
     <span>FLM · PLM · CTS · AQL · VGL</span>
   </footer>
 
-  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-  <script src="js/viewer.js"></script>
+  <script src="https://unpkg.com/three@0.149.0/build/three.min.js"></script>
+  <script src="viewer.js"></script>
 </body>
 </html>
