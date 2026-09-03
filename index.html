@@ -1,358 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VESPASIAN</title>
-  <meta name="description" content="Vespasian. Concept air vehicles and analysis. Fulmen, Pilum, Contus, Aquila. Vigil is the picture." />
-  <link rel="icon" href="logo-eagle.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #000;
-      --fg: #f0eee8;
-      --dim: rgba(240,238,232,.58);
-      --line: rgba(240,238,232,.22);
-      --gold: #c4a574;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--fg);
-      font-family: Barlow, sans-serif;
-      line-height: 1.45;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
-    .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
-    nav {
-      position: fixed; inset: 0 0 auto; z-index: 40;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 22px;
-      background: linear-gradient(rgba(0,0,0,.92), rgba(0,0,0,0));
-      font-family: "Barlow Condensed", sans-serif;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      font-size: 12px;
-    }
-    .brand { display: flex; align-items: center; gap: 10px; }
-    .brand img { height: 28px; width: auto; filter: invert(1); mix-blend-mode: screen; }
-    /* eagle-logo is white-on-black; invert not needed if already light edges */
-    nav .brand img.eagle { filter: none; height: 34px; }
-    nav .links { display: flex; gap: 20px; }
-    nav a:hover { color: var(--gold); }
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      place-items: end start;
-      padding: 0 0 72px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse at 70% 40%, rgba(196,165,116,.12), transparent 42%),
-        radial-gradient(circle at 50% 80%, rgba(255,255,255,.05), transparent 50%),
-        #000;
-    }
-    .hero-logo {
-      position: absolute; right: 4vw; top: 12vh;
-      width: min(48vw, 560px);
-      mix-blend-mode: screen;
-      filter: contrast(1.2) brightness(1.35);
-      animation: drift 14s ease-in-out infinite alternate;
-    }
-    @keyframes drift {
-      from { transform: translateY(0) scale(1); opacity: .82; }
-      to { transform: translateY(-18px) scale(1.03); opacity: 1; }
-    }
-    .hero .wrap { position: relative; z-index: 2; }
-    .kicker {
-      font-family: "Barlow Condensed", sans-serif;
-      letter-spacing: .32em; text-transform: uppercase;
-      font-size: 11px; color: var(--gold);
-      animation: rise .9s ease both;
-    }
-    h1 {
-      font-family: "Barlow Condensed", sans-serif;
-      font-size: clamp(56px, 12vw, 128px);
-      letter-spacing: .14em;
-      line-height: .86;
-      text-transform: uppercase;
-      margin: 12px 0 18px;
-      animation: rise 1.1s ease both;
-    }
-    .spaced { letter-spacing: .42em; font-size: clamp(16px, 2.2vw, 22px); color: var(--dim); text-transform: uppercase; }
-    .lede { max-width: 46ch; color: var(--dim); margin-top: 18px; animation: rise 1.3s ease both; }
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: none; }
-    }
-    .row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      min-height: 42px; padding: 0 18px;
-      border: 1px solid var(--line);
-      font-family: "Barlow Condensed", sans-serif;
-      letter-spacing: .18em; text-transform: uppercase; font-size: 12px;
-      background: rgba(0,0,0,.25);
-    }
-    .btn:hover, .btn.on { border-color: var(--gold); color: var(--gold); }
-    section { padding: 92px 0; border-top: 1px solid rgba(240,238,232,.08); }
-    h2 {
-      font-family: "Barlow Condensed", sans-serif;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      font-size: clamp(32px, 5vw, 56px);
-      line-height: .92;
-      margin: 8px 0 18px;
-    }
-    h3 {
-      font-family: "Barlow Condensed", sans-serif;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-    }
-    .note { color: var(--dim); max-width: 68ch; }
-    .lineup {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 36px;
-    }
-    .tile {
-      border: 1px solid rgba(240,238,232,.12);
-      min-height: 220px; padding: 22px;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      background: linear-gradient(180deg, #0a0a0a, #000);
-      transition: border-color .25s, transform .25s;
-    }
-    .tile:hover { border-color: var(--gold); transform: translateY(-4px); }
-    .tile small { color: var(--gold); letter-spacing: .22em; text-transform: uppercase; font-size: 11px; }
-    .tile strong {
-      font-family: "Barlow Condensed", sans-serif;
-      font-size: 34px; letter-spacing: .1em; display: block; margin-top: 8px;
-    }
-    .sys {
-      display: grid; grid-template-columns: 1.1fr .9fr; gap: 36px; align-items: center;
-    }
-    .specs {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-      background: rgba(240,238,232,.12); margin-top: 22px;
-    }
-    .specs div { background: #000; padding: 14px 12px; }
-    .specs b { display: block; font-family: "Barlow Condensed", sans-serif; font-size: 20px; letter-spacing: .04em; }
-    .specs i { font-style: normal; color: var(--dim); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
-    .stage-wrap {
-      position: relative;
-      border: 1px solid rgba(240,238,232,.12);
-      background: radial-gradient(circle at 50% 40%, #151515, #000 70%);
-      min-height: 380px;
-    }
-    #stage { width: 100%; height: 380px; display: block; cursor: grab; }
-    .stage-label {
-      position: absolute; left: 16px; bottom: 14px;
-      font-family: "Barlow Condensed", sans-serif;
-      letter-spacing: .2em; text-transform: uppercase; font-size: 12px; color: var(--dim);
-    }
-    iframe.chart { width: 100%; height: 360px; border: 1px solid rgba(240,238,232,.12); background: #000; }
-    .stack { display: grid; gap: 40px; }
-    footer {
-      padding: 28px 0 56px;
-      display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-      color: var(--dim);
-      font-family: "Barlow Condensed", sans-serif;
-      letter-spacing: .16em; text-transform: uppercase; font-size: 12px;
-    }
-    .reveal { opacity: 0; transform: translateY(24px); animation: rise .8s ease forwards; }
-    @media (max-width: 900px) {
-      .lineup, .sys { grid-template-columns: 1fr; }
-      nav .links { display: none; }
-      .hero-logo { width: 70vw; top: 12vh; opacity: .55; }
-    }
-  </style>
+  <meta name="description" content="Vespasian. Concept air vehicles and analysis. Fulmen, Pilum, Contus, Aquila. Vigil is the picture.">
+  <meta property="og:title" content="VESPASIAN">
+  <meta property="og:description" content="Vespasian. Concept air vehicles and analysis. Fulmen, Pilum, Contus, Aquila. Vigil is the picture.">
+  <meta property="og:image" content="/og.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Barlow:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/site.css">
 </head>
 <body>
-  <nav>
-    <a class="brand" href="#top">
-      <img class="eagle" src="logo-eagle.png" alt="Vespasian" />
+
+<header class="site-header" data-header>
+  <div class="header-bar">
+    <a class="brand" href="/">
+      <img src="/logo-eagle.png" alt="">
       <span>Vespasian</span>
     </a>
-    <div class="links">
-      <a href="#systems">Systems</a>
-      <a href="#fulmen">Fulmen</a>
-      <a href="#pilum">Pilum</a>
-      <a href="#contus">Contus</a>
-      <a href="#aquila">Aquila</a>
-      <a href="#vigil">Vigil</a>
-      <a href="#analysis">Analysis</a>
+    <nav class="nav-desktop">
+      <a href="/systems/" class="">Systems</a><a href="/vigil/" class="">Vigil</a><a href="/analysis/" class="">Analysis</a><a href="/company/" class="">Company</a>
+    </nav>
+    <button class="menu-btn" type="button" data-menu aria-expanded="false" aria-label="Open menu">
+      <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <div class="nav-mobile" data-nav-mobile>
+    <a class="big" href="/systems/">Systems</a><a class="big" href="/vigil/">Vigil</a><a class="big" href="/analysis/">Analysis</a><a class="big" href="/company/">Company</a>
+    <div class="nav-grid">
+      <a href="/systems/fulmen/"><div class="kicker">FLM</div><div class="display" style="font-size:1.5rem;letter-spacing:.1em;margin-top:.25rem">Fulmen</div></a><a href="/systems/pilum/"><div class="kicker">PLM</div><div class="display" style="font-size:1.5rem;letter-spacing:.1em;margin-top:.25rem">Pilum</div></a><a href="/systems/contus/"><div class="kicker">CTS</div><div class="display" style="font-size:1.5rem;letter-spacing:.1em;margin-top:.25rem">Contus</div></a><a href="/systems/aquila/"><div class="kicker">AQL</div><div class="display" style="font-size:1.5rem;letter-spacing:.1em;margin-top:.25rem">Aquila</div></a>
     </div>
-  </nav>
+  </div>
+</header>
 
-  <header class="hero" id="top">
-    <div class="hero-bg"></div>
-    <img class="hero-logo" src="logo-eagle.png" alt="" />
-    <div class="wrap">
-      <div class="kicker">Vespasian</div>
-      <h1>Vespasian</h1>
-      <div class="spaced">Fulmen · Pilum · Contus · Aquila</div>
-      <p class="lede">Concept air vehicles and a common picture. Four Latin names. Vigil is the software. Analysis packs sit under each airframe: CFD, CBAERO, FEA. Public pages stay at concept level.</p>
-      <div class="row">
-        <a class="btn" href="#systems">The line</a>
-        <a class="btn" href="#viewer">Turn the model</a>
-      </div>
-    </div>
-  </header>
-
-  <section id="systems">
-    <div class="wrap">
-      <div class="kicker">Line</div>
-      <h2>Four airframes.<br>One picture.</h2>
-      <p class="note">Thrown weapons, a bolt from the sky, a bird that returns. Cacus is spare. Vigil stays off the airframes.</p>
-      <div class="lineup">
-        <a class="tile" href="#fulmen"><small>FLM · F-35 class</small><strong>Fulmen</strong><span class="note">Thunderbolt</span></a>
-        <a class="tile" href="#pilum"><small>PLM · 155 class</small><strong>Pilum</strong><span class="note">Heavy javelin</span></a>
-        <a class="tile" href="#contus"><small>CTS · VLS class</small><strong>Contus</strong><span class="note">Heavy lance</span></a>
-        <a class="tile" href="#aquila"><small>AQL · UAS</small><strong>Aquila</strong><span class="note">Eagle</span></a>
+<main>
+  <section class="hero">
+    <video class="hero-media" autoplay muted loop playsinline poster="/images/hero-range.jpg">
+      <source src="/videos/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-shade"></div>
+    <div class="hero-copy">
+      <div class="kicker accent">Concept studies</div>
+      <h1>V E S P A S I A N</h1>
+      <p class="sub">Fulmen · Pilum · Contus · Aquila</p>
+      <p class="lede mt-5">Concept air vehicles and a common picture. Four Latin names. Vigil is the software. Analysis packs sit under each airframe: CFD, CBAERO, FEA. Public pages stay at concept level.</p>
+      <div class="actions">
+        <a class="bracket solid" href="/systems/">The line</a>
+        <a class="bracket" href="#geometry">Geometry</a>
       </div>
     </div>
   </section>
-
-  <section id="viewer">
-    <div class="wrap">
-      <div class="kicker">Geometry</div>
-      <h2>Handle the concept.</h2>
-      <p class="note">Drag to rotate. These are abstract stand-ins, not flight hardware. Drop a real .glb later; the frame stays.</p>
-      <div class="row" style="margin:18px 0 14px">
-        <button class="btn on" type="button" data-model="fulmen" data-label="FLM · Fulmen">Fulmen</button>
-        <button class="btn" type="button" data-model="pilum" data-label="PLM · Pilum">Pilum</button>
-        <button class="btn" type="button" data-model="contus" data-label="CTS · Contus">Contus</button>
-        <button class="btn" type="button" data-model="aquila" data-label="AQL · Aquila">Aquila</button>
-      </div>
-      <div class="stage-wrap">
-        <canvas id="stage"></canvas>
-        <div class="stage-label" id="stage-label">FLM · Fulmen</div>
-      </div>
-    </div>
+  <section class="ticker"><span>Vespasian</span><span>FLM · PLM · CTS · AQL · VGL</span><span>Public · concept</span></section>
+  <section class="wrap">
+    <div class="kicker">Line</div>
+    <h2 class="title-xl mt-3">Four airframes. One picture.</h2>
+    <p class="lede mt-4">Thrown weapons, a bolt from the sky, a bird that returns. Cacus is spare. Vigil stays off the airframes.</p>
   </section>
-
-  <section id="fulmen">
-    <div class="wrap sys">
-      <div>
-        <div class="kicker">FLM · radio: Fulmen off the Lightning</div>
-        <h2>Fulmen</h2>
-        <p class="note">Thunderbolt. F-35-class air-launched concept. Public page: name, class, stencil, and which analysis files exist. No seeker or payload layout on this site.</p>
-        <div class="specs">
-          <div><i>Stencil</i><b>FLM</b></div>
-          <div><i>Class</i><b>Air launched</b></div>
-          <div><i>Meaning</i><b>Thunderbolt</b></div>
-          <div><i>Status</i><b>Concept</b></div>
-        </div>
-      </div>
-      <div>
-        <iframe class="chart" src="cfd-aero.html" title="Fulmen CFD placeholder"></iframe>
-        <div class="row"><a class="btn" href="cfd-force.csv" download>Download CFD CSV</a></div>
-      </div>
+  
+<article class="border-t">
+  <div class="split split-2 ">
+    <div class="frame min-h"><span class="frame-label">FLM · Fulmen</span><span class="frame-meta">Air launched</span><img src="/images/fulmen-release.jpg" alt=""></div>
+    <div class="split-copy">
+      <div class="kicker">FLM · F-35-class air-launched</div>
+      <h2 class="title-lg mt-3">F U L M E N</h2>
+      <p class="sub display muted mt-3" style="letter-spacing:.14em">Thunderbolt</p>
+      <p class="lede mt-5">Fulmen is the bolt from the sky. The public page carries the name, class, stencil, and the CFD pack. No seeker or payload layout on this site.</p>
+      <dl class="specs"><div><dt>Peak L/D</dt><dd>23.3 @ M0.60</dd></div><div><dt>Transonic CD</dt><dd>0.048 @ M1.05</dd></div><div><dt>Envelope</dt><dd>M 0.6–3.0</dd></div><div><dt>Alpha</dt><dd>4.0°</dd></div></dl>
+      <div class="actions"><a class="bracket" href="/systems/fulmen/">Learn more</a></div>
     </div>
-  </section>
-
-  <section id="pilum">
-    <div class="wrap sys">
-      <div>
-        <div class="kicker">PLM · radio: Pilum from the guns</div>
-        <h2>Pilum</h2>
-        <p class="note">Heavy javelin. 155-class ramjet-round concept. Show heating and force coefficients here when your CBAERO and CFD runs are exported.</p>
-        <div class="specs">
-          <div><i>Stencil</i><b>PLM</b></div>
-          <div><i>Class</i><b>155 artillery</b></div>
-          <div><i>Meaning</i><b>Heavy javelin</b></div>
-          <div><i>Status</i><b>Concept</b></div>
-        </div>
-      </div>
-      <div>
-        <iframe class="chart" src="cbaero-heat.html" title="Pilum heating placeholder"></iframe>
-        <div class="row"><a class="btn" href="cbaero-heat.csv" download>Download CBAERO CSV</a></div>
-      </div>
+  </div>
+</article>
+<article class="border-t">
+  <div class="split split-2 rev">
+    <div class="frame min-h"><span class="frame-label">PLM · Pilum</span><span class="frame-meta">155 artillery</span><img src="/images/pilum-stand.jpg" alt=""></div>
+    <div class="split-copy">
+      <div class="kicker">PLM · 155-class ramjet-round</div>
+      <h2 class="title-lg mt-3">P I L U M</h2>
+      <p class="sub display muted mt-3" style="letter-spacing:.14em">Heavy javelin</p>
+      <p class="lede mt-5">Pilum is thrown from the guns. Show heating and force coefficients here when the CBAERO and CFD runs are exported. Public pages stay at concept level.</p>
+      <dl class="specs"><div><dt>Peak nose</dt><dd>88 W/cm²</dd></div><div><dt>Peak LE</dt><dd>41 W/cm²</dd></div><div><dt>At time</dt><dd>t = 50 s</dd></div><div><dt>Window</dt><dd>0–180 s</dd></div></dl>
+      <div class="actions"><a class="bracket" href="/systems/pilum/">Learn more</a></div>
     </div>
-  </section>
-
-  <section id="contus">
-    <div class="wrap sys">
-      <div>
-        <div class="kicker">CTS · radio: Contus off the rails</div>
-        <h2>Contus</h2>
-        <p class="note">Heavy lance. Cell-launched air-breather concept. Two-handed, hits from a distance, does not come back. Canister marking: CTS. Say Vespasian Contus on slides.</p>
-        <div class="specs">
-          <div><i>Stencil</i><b>CTS</b></div>
-          <div><i>Class</i><b>VLS</b></div>
-          <div><i>Meaning</i><b>Heavy lance</b></div>
-          <div><i>Status</i><b>Concept</b></div>
-        </div>
-      </div>
-      <div>
-        <iframe class="chart" src="cfd-aero.html" title="Contus CFD placeholder"></iframe>
-        <div class="row"><a class="btn" href="cfd-force.csv" download>Download CFD CSV</a></div>
-      </div>
+  </div>
+</article>
+<article class="border-t">
+  <div class="split split-2 ">
+    <div class="frame min-h"><span class="frame-label">CTS · Contus</span><span class="frame-meta">VLS</span><img src="/images/contus-vls.jpg" alt=""></div>
+    <div class="split-copy">
+      <div class="kicker">CTS · VLS cell-launched air-breather</div>
+      <h2 class="title-lg mt-3">C O N T U S</h2>
+      <p class="sub display muted mt-3" style="letter-spacing:.14em">Heavy lance</p>
+      <p class="lede mt-5">Two-handed, hits from a distance, does not come back. Canister marking: CTS. Say Vespasian Contus on slides.</p>
+      <dl class="specs"><div><dt>Peak L/D</dt><dd>23.3 @ M0.60</dd></div><div><dt>Transonic CD</dt><dd>0.048 @ M1.05</dd></div><div><dt>Envelope</dt><dd>M 0.6–3.0</dd></div><div><dt>Returns</dt><dd>No</dd></div></dl>
+      <div class="actions"><a class="bracket" href="/systems/contus/">Learn more</a></div>
     </div>
-  </section>
-
-  <section id="aquila">
-    <div class="wrap sys">
-      <div>
-        <div class="kicker">AQL · radio: Aquila in the stack</div>
-        <h2>Aquila</h2>
-        <p class="note">Eagle. The aircraft that returns. UAS concept. Structures case sits in the FEA plot until you replace the CSV with your spar or bulkhead run.</p>
-        <div class="specs">
-          <div><i>Stencil</i><b>AQL</b></div>
-          <div><i>Class</i><b>UAS</b></div>
-          <div><i>Meaning</i><b>Eagle</b></div>
-          <div><i>Status</i><b>Concept</b></div>
-        </div>
-      </div>
-      <div>
-        <iframe class="chart" src="fea-spar.html" title="Aquila FEA placeholder"></iframe>
-        <div class="row"><a class="btn" href="fea-spar.csv" download>Download FEA CSV</a></div>
-      </div>
+  </div>
+</article>
+<article class="border-t">
+  <div class="split split-2 rev">
+    <div class="frame min-h"><span class="frame-label">AQL · Aquila</span><span class="frame-meta">UAS</span><img src="/images/aquila-sea.jpg" alt=""></div>
+    <div class="split-copy">
+      <div class="kicker">AQL · UAS that returns</div>
+      <h2 class="title-lg mt-3">A Q U I L A</h2>
+      <p class="sub display muted mt-3" style="letter-spacing:.14em">Eagle</p>
+      <p class="lede mt-5">Aquila is the bird in the stack. The structures case sits in the FEA plot until you replace the CSV with a spar or bulkhead run.</p>
+      <dl class="specs"><div><dt>Root stress</dt><dd>186 MPa</dd></div><div><dt>Allowable</dt><dd>240 MPa</dd></div><div><dt>Margin</dt><dd>23%</dd></div><div><dt>Load case</dt><dd>+3.0g pull-up</dd></div></dl>
+      <div class="actions"><a class="bracket" href="/systems/aquila/">Learn more</a></div>
     </div>
+  </div>
+</article>
+  <section id="geometry" class="wrap" style="border-top:1px solid var(--line)">
+    <div class="kicker">Geometry</div>
+    <h2 class="title-xl mt-3">Handle the concept.</h2>
+    <p class="lede mt-4">Drag to rotate. These are abstract stand-ins, not flight hardware. Drop a real .glb later; the frame stays.</p>
+    <div class="mt-5"><div class="viewer" data-viewer data-model="fulmen">
+    <div class="viewer-switch"><button type="button" class="bracket" data-model="fulmen">FLM · Fulmen</button><button type="button" class="bracket" data-model="pilum">PLM · Pilum</button><button type="button" class="bracket" data-model="contus">CTS · Contus</button><button type="button" class="bracket" data-model="aquila">AQL · Aquila</button></div>
+    <div class="frame "><span class="frame-label">FLM · Fulmen</span><span class="frame-meta">Drag to rotate · abstract stand-in</span><canvas></canvas></div>
+    <span class="kicker" data-viewer-label hidden></span>
+  </div></div>
   </section>
-
-  <section id="vigil">
-    <div class="wrap">
+  <section class="split split-2">
+    <div class="split-copy">
       <div class="kicker">Software</div>
-      <h2>Vigil is the picture.</h2>
-      <p class="note">Vigil stays off the airframes. If a fifth word is needed, it is the software: the common picture around Fulmen, Pilum, Contus, and Aquila. This block is a stub until you have screenshots.</p>
+      <h2 class="title-xl mt-3">V I G I L</h2>
+      <p class="sub display muted mt-3" style="letter-spacing:.16em">The picture</p>
+      <p class="lede mt-5">Vigil stays off the airframes. If a fifth word is needed, it is the software: the common picture around Fulmen, Pilum, Contus, and Aquila.</p>
+      <div class="actions"><a class="bracket" href="/vigil/">Open Vigil</a></div>
     </div>
+    <div class="frame "><span class="frame-label">VGL · common picture</span><span class="frame-meta">Range control</span><img src="/images/operators.jpg" alt=""></div>
   </section>
+  <section class="wrap" style="border-top:1px solid var(--line)">
+    <div class="kicker">Data</div>
+    <h2 class="title-xl mt-3">How plots get on the page.</h2>
+    <p class="lede mt-4">Keep the filenames. Export CSV from the solver. Overwrite the file. CFD, CBAERO, and FEA packs sit under the airframes.</p>
+    <div class="actions"><a class="bracket" href="/analysis/">Open analysis</a></div>
+  </section>
+</main>
 
-  <section id="analysis">
-    <div class="wrap stack">
-      <div>
-        <div class="kicker">Data</div>
-        <h2>How plots get on the page.</h2>
-        <p class="note">Keep the filenames. Export CSV from the solver. Overwrite the file in /data. If the column names change, edit the matching HTML in /charts or write a new Plotly export over that file.</p>
-      </div>
-      <div>
-        <h3>CFD</h3>
-        <p class="note" style="margin:8px 0 12px">Force coefficients vs Mach. File: cfd-force.csv · view: cfd-aero.html</p>
-        <iframe class="chart" src="cfd-aero.html" title="CFD"></iframe>
-      </div>
-      <div>
-        <h3>CBAERO</h3>
-        <p class="note" style="margin:8px 0 12px">Heat flux vs time. File: cbaero-heat.csv · view: cbaero-heat.html</p>
-        <iframe class="chart" src="cbaero-heat.html" title="CBAERO"></iframe>
-      </div>
-      <div>
-        <h3>FEA</h3>
-        <p class="note" style="margin:8px 0 12px">Spar stress vs span. File: fea-spar.csv · view: fea-spar.html</p>
-        <iframe class="chart" src="fea-spar.html" title="FEA"></iframe>
-      </div>
+<footer class="site-footer">
+  <div class="foot-grid">
+    <div>
+      <div class="brand"><img src="/logo-eagle.png" alt=""><span>Vespasian</span></div>
+      <p class="lede mt-4">Concept air vehicles and a common picture. Public pages stay at concept level.</p>
     </div>
-  </section>
-
-  <footer class="wrap">
+    <div>
+      <div class="kicker">Line</div>
+      <ul><li><a href="/systems/fulmen/">FLM · Fulmen</a></li><li><a href="/systems/pilum/">PLM · Pilum</a></li><li><a href="/systems/contus/">CTS · Contus</a></li><li><a href="/systems/aquila/">AQL · Aquila</a></li></ul>
+    </div>
+    <div>
+      <div class="kicker">House</div>
+      <ul>
+        <li><a href="/vigil/">Vigil</a></li>
+        <li><a href="/analysis/">Analysis</a></li>
+        <li><a href="/company/">Company</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bar">
     <span>Vespasian · concept studies</span>
     <span>FLM · PLM · CTS · AQL · VGL</span>
-  </footer>
-
-  <script src="https://unpkg.com/three@0.149.0/build/three.min.js"></script>
-  <script src="viewer.js"></script>
+  </div>
+</footer>
+<script type="module" src="/js/site.js"></script>
+<script type="module" src="/js/viewer.js"></script>
 </body>
 </html>
