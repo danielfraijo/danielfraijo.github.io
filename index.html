@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FRAIJO LABORATORY</title>
-  <meta name="description" content="Independent aerospace concepts. Vehicle studies with CFD, CBAERO, and FEA." />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
+  <title>VESPASIAN</title>
+  <meta name="description" content="Vespasian. Concept air vehicles and analysis. Fulmen, Pilum, Contus, Aquila. Vigil is the picture." />
+  <link rel="icon" href="assets/logo-eagle.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #07080a;
-      --fg: #e8e6df;
-      --muted: rgba(232,230,223,.62);
-      --line: rgba(232,230,223,.28);
-      --accent: #c4a574;
+      --bg: #000;
+      --fg: #f0eee8;
+      --dim: rgba(240,238,232,.58);
+      --line: rgba(240,238,232,.22);
+      --gold: #c4a574;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -23,190 +24,334 @@
       line-height: 1.45;
     }
     a { color: inherit; text-decoration: none; }
-    .wrap { width: min(1140px, calc(100% - 40px)); margin: 0 auto; }
+    img { display: block; max-width: 100%; }
+    .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
     nav {
-      position: fixed; inset: 0 0 auto; z-index: 20;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 16px 24px;
-      background: linear-gradient(#07080a, transparent);
+      position: fixed; inset: 0 0 auto; z-index: 40;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 22px;
+      background: linear-gradient(rgba(0,0,0,.92), rgba(0,0,0,0));
       font-family: "Barlow Condensed", sans-serif;
-      letter-spacing: .16em;
+      letter-spacing: .18em;
       text-transform: uppercase;
-      font-size: 13px;
+      font-size: 12px;
     }
-    nav .links { display: flex; gap: 22px; }
-    nav a:hover { color: var(--accent); }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand img { height: 28px; width: auto; filter: invert(1); mix-blend-mode: screen; }
+    /* eagle-logo is white-on-black; invert not needed if already light edges */
+    nav .brand img.eagle { filter: none; height: 34px; }
+    nav .links { display: flex; gap: 20px; }
+    nav a:hover { color: var(--gold); }
     .hero {
       min-height: 100vh;
-      display: flex; align-items: flex-end;
-      padding: 0 0 80px;
-      background:
-        linear-gradient(to top, #07080a 0%, rgba(7,8,10,.35) 45%, rgba(7,8,10,.2) 100%),
-        url("https://images.unsplash.com/photo-1457364887197-9150188c107b?auto=format&fit=crop&w=2400&q=80") center 30%/cover no-repeat;
+      display: grid;
+      place-items: end start;
+      padding: 0 0 72px;
+      position: relative;
+      overflow: hidden;
     }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 40%, rgba(196,165,116,.12), transparent 42%),
+        radial-gradient(circle at 50% 80%, rgba(255,255,255,.05), transparent 50%),
+        #000;
+    }
+    .hero-logo {
+      position: absolute; right: 6vw; top: 18vh;
+      width: min(42vw, 520px);
+      opacity: .9;
+      animation: drift 14s ease-in-out infinite alternate;
+    }
+    @keyframes drift {
+      from { transform: translateY(0) scale(1); opacity: .82; }
+      to { transform: translateY(-18px) scale(1.03); opacity: 1; }
+    }
+    .hero .wrap { position: relative; z-index: 2; }
     .kicker {
       font-family: "Barlow Condensed", sans-serif;
-      letter-spacing: .28em; text-transform: uppercase;
-      font-size: 12px; color: var(--accent); margin-bottom: 14px;
+      letter-spacing: .32em; text-transform: uppercase;
+      font-size: 11px; color: var(--gold);
+      animation: rise .9s ease both;
     }
-    h1, h2, h3, .caps {
+    h1 {
       font-family: "Barlow Condensed", sans-serif;
-      text-transform: uppercase; letter-spacing: .06em; font-weight: 700;
+      font-size: clamp(56px, 12vw, 128px);
+      letter-spacing: .14em;
+      line-height: .86;
+      text-transform: uppercase;
+      margin: 12px 0 18px;
+      animation: rise 1.1s ease both;
     }
-    h1 { font-size: clamp(48px, 9vw, 96px); line-height: .9; max-width: 12ch; }
-    h2 { font-size: clamp(28px, 4vw, 44px); line-height: .95; margin: 8px 0 22px; }
-    .lede { max-width: 46ch; color: var(--muted); margin-top: 16px; }
+    .spaced { letter-spacing: .42em; font-size: clamp(16px, 2.2vw, 22px); color: var(--dim); text-transform: uppercase; }
+    .lede { max-width: 46ch; color: var(--dim); margin-top: 18px; animation: rise 1.3s ease both; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: none; }
+    }
     .row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
       min-height: 42px; padding: 0 18px;
       border: 1px solid var(--line);
       font-family: "Barlow Condensed", sans-serif;
-      letter-spacing: .16em; text-transform: uppercase; font-size: 13px;
+      letter-spacing: .18em; text-transform: uppercase; font-size: 12px;
+      background: rgba(0,0,0,.25);
     }
-    .btn:hover { border-color: var(--accent); color: var(--accent); }
-    section { padding: 84px 0; border-top: 1px solid rgba(232,230,223,.08); }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .card {
-      border: 1px solid rgba(232,230,223,.12);
-      min-height: 280px; padding: 28px;
-      background: #0c0d10;
+    .btn:hover, .btn.on { border-color: var(--gold); color: var(--gold); }
+    section { padding: 92px 0; border-top: 1px solid rgba(240,238,232,.08); }
+    h2 {
+      font-family: "Barlow Condensed", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: .92;
+      margin: 8px 0 18px;
+    }
+    h3 {
+      font-family: "Barlow Condensed", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+    .note { color: var(--dim); max-width: 68ch; }
+    .lineup {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 36px;
+    }
+    .tile {
+      border: 1px solid rgba(240,238,232,.12);
+      min-height: 220px; padding: 22px;
       display: flex; flex-direction: column; justify-content: flex-end;
+      background: linear-gradient(180deg, #0a0a0a, #000);
+      transition: border-color .25s, transform .25s;
     }
-    .card span { color: var(--accent); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
+    .tile:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .tile small { color: var(--gold); letter-spacing: .22em; text-transform: uppercase; font-size: 11px; }
+    .tile strong {
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 34px; letter-spacing: .1em; display: block; margin-top: 8px;
+    }
+    .sys {
+      display: grid; grid-template-columns: 1.1fr .9fr; gap: 36px; align-items: center;
+    }
     .specs {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
-      background: rgba(232,230,223,.12); margin: 28px 0;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: rgba(240,238,232,.12); margin-top: 22px;
     }
-    .specs div { background: #07080a; padding: 16px 12px; }
-    .specs b { display: block; font-size: 22px; font-family: "Barlow Condensed", sans-serif; }
-    .specs i { font-style: normal; color: var(--muted); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
-    iframe.chart { width: 100%; height: 380px; border: 1px solid rgba(232,230,223,.12); background: #000; }
-    .stack { display: grid; gap: 48px; }
+    .specs div { background: #000; padding: 14px 12px; }
+    .specs b { display: block; font-family: "Barlow Condensed", sans-serif; font-size: 20px; letter-spacing: .04em; }
+    .specs i { font-style: normal; color: var(--dim); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
+    .stage-wrap {
+      position: relative;
+      border: 1px solid rgba(240,238,232,.12);
+      background: radial-gradient(circle at 50% 40%, #151515, #000 70%);
+      min-height: 380px;
+    }
+    #stage { width: 100%; height: 380px; display: block; cursor: grab; }
+    .stage-label {
+      position: absolute; left: 16px; bottom: 14px;
+      font-family: "Barlow Condensed", sans-serif;
+      letter-spacing: .2em; text-transform: uppercase; font-size: 12px; color: var(--dim);
+    }
+    iframe.chart { width: 100%; height: 360px; border: 1px solid rgba(240,238,232,.12); background: #000; }
+    .stack { display: grid; gap: 40px; }
     footer {
-      padding: 28px 0 48px; color: var(--muted);
+      padding: 28px 0 56px;
       display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-      font-family: "Barlow Condensed", sans-serif; letter-spacing: .12em; text-transform: uppercase; font-size: 12px;
+      color: var(--dim);
+      font-family: "Barlow Condensed", sans-serif;
+      letter-spacing: .16em; text-transform: uppercase; font-size: 12px;
     }
-    .note { color: var(--muted); font-size: 14px; max-width: 70ch; }
-    @media (max-width: 800px) {
-      .grid-2, .specs { grid-template-columns: 1fr 1fr; }
+    .reveal { opacity: 0; transform: translateY(24px); animation: rise .8s ease forwards; }
+    @media (max-width: 900px) {
+      .lineup, .sys { grid-template-columns: 1fr; }
       nav .links { display: none; }
+      .hero-logo { width: 70vw; top: 12vh; opacity: .55; }
     }
   </style>
 </head>
 <body>
   <nav>
-    <a href="#top">Fraijo Lab</a>
+    <a class="brand" href="#top">
+      <img class="eagle" src="assets/logo-eagle.png" alt="Vespasian" />
+      <span>Vespasian</span>
+    </a>
     <div class="links">
       <a href="#systems">Systems</a>
+      <a href="#fulmen">Fulmen</a>
+      <a href="#pilum">Pilum</a>
+      <a href="#contus">Contus</a>
+      <a href="#aquila">Aquila</a>
+      <a href="#vigil">Vigil</a>
       <a href="#analysis">Analysis</a>
-      <a href="#data">Data</a>
-      <a href="https://github.com/danielfraijo">GitHub</a>
     </div>
   </nav>
 
   <header class="hero" id="top">
+    <div class="hero-bg"></div>
+    <img class="hero-logo" src="assets/logo-eagle.png" alt="" />
     <div class="wrap">
-      <div class="kicker">Independent concept studies</div>
-      <h1>Flight vehicles. Measured.</h1>
-      <p class="lede">Missile-class and unmanned air vehicle concepts with public analysis packs: CFD force maps, CBAERO heating, and FEA load cases. Replace the placeholder runs with your own files.</p>
+      <div class="kicker">Vespasian</div>
+      <h1>Vespasian</h1>
+      <div class="spaced">Fulmen · Pilum · Contus · Aquila</div>
+      <p class="lede">Concept air vehicles and a common picture. Four Latin names. Vigil is the software. Analysis packs sit under each airframe: CFD, CBAERO, FEA. Public pages stay at concept level.</p>
       <div class="row">
-        <a class="btn" href="#systems">View systems</a>
-        <a class="btn" href="#analysis">Open plots</a>
+        <a class="btn" href="#systems">The line</a>
+        <a class="btn" href="#viewer">Turn the model</a>
       </div>
     </div>
   </header>
 
   <section id="systems">
     <div class="wrap">
-      <div class="kicker">01 — Concepts</div>
-      <h2>Named vehicles</h2>
-      <p class="note">Rename these. They exist so the site already looks like a product house (Tiberius / Specter pattern): one block per vehicle, then specs, then analysis.</p>
-      <div class="grid-2" style="margin-top:28px">
-        <a class="card" href="#viper">
-          <span>Air vehicle</span>
-          <h3 style="font-size:42px;margin-top:8px">Viper</h3>
-          <p class="note">Compact high-speed airframe study. Boost-glide class outer mold line.</p>
-        </a>
-        <a class="card" href="#kite">
-          <span>Unmanned system</span>
-          <h3 style="font-size:42px;margin-top:8px">Kite</h3>
-          <p class="note">Long-endurance UAV concept. Structures and aero packaged together.</p>
-        </a>
+      <div class="kicker">Line</div>
+      <h2>Four airframes.<br>One picture.</h2>
+      <p class="note">Thrown weapons, a bolt from the sky, a bird that returns. Cacus is spare. Vigil stays off the airframes.</p>
+      <div class="lineup">
+        <a class="tile" href="#fulmen"><small>FLM · F-35 class</small><strong>Fulmen</strong><span class="note">Thunderbolt</span></a>
+        <a class="tile" href="#pilum"><small>PLM · 155 class</small><strong>Pilum</strong><span class="note">Heavy javelin</span></a>
+        <a class="tile" href="#contus"><small>CTS · VLS class</small><strong>Contus</strong><span class="note">Heavy lance</span></a>
+        <a class="tile" href="#aquila"><small>AQL · UAS</small><strong>Aquila</strong><span class="note">Eagle</span></a>
       </div>
     </div>
   </section>
 
-  <section id="viper">
+  <section id="viewer">
     <div class="wrap">
-      <div class="kicker">Viper · concept</div>
-      <h2>High-speed airframe</h2>
-      <p class="note">Public-facing description only: configuration family, analysis tools used, and what the plots show. Keep seeker, payload, and manufacturing detail off this page.</p>
-      <div class="specs">
-        <div><i>Class</i><b>Air vehicle</b></div>
-        <div><i>Regime</i><b>Transonic–supersonic</b></div>
-        <div><i>Tools</i><b>CFD · CBAERO</b></div>
-        <div><i>Status</i><b>Study</b></div>
+      <div class="kicker">Geometry</div>
+      <h2>Handle the concept.</h2>
+      <p class="note">Drag to rotate. These are abstract stand-ins, not flight hardware. Drop a real .glb later; the frame stays.</p>
+      <div class="row" style="margin:18px 0 14px">
+        <button class="btn on" type="button" data-model="fulmen" data-label="FLM · Fulmen">Fulmen</button>
+        <button class="btn" type="button" data-model="pilum" data-label="PLM · Pilum">Pilum</button>
+        <button class="btn" type="button" data-model="contus" data-label="CTS · Contus">Contus</button>
+        <button class="btn" type="button" data-model="aquila" data-label="AQL · Aquila">Aquila</button>
+      </div>
+      <div class="stage-wrap">
+        <canvas id="stage"></canvas>
+        <div class="stage-label" id="stage-label">FLM · Fulmen</div>
       </div>
     </div>
   </section>
 
-  <section id="kite">
-    <div class="wrap">
-      <div class="kicker">Kite · concept</div>
-      <h2>Unmanned airframe</h2>
-      <p class="note">Structures-led concept. The FEA plot is a spar stress distribution under a pull-up case, compared with an allowable.</p>
-      <div class="specs">
-        <div><i>Class</i><b>UAV</b></div>
-        <div><i>Regime</i><b>Subsonic</b></div>
-        <div><i>Tools</i><b>FEA · CFD</b></div>
-        <div><i>Status</i><b>Study</b></div>
+  <section id="fulmen">
+    <div class="wrap sys">
+      <div>
+        <div class="kicker">FLM · radio: Fulmen off the Lightning</div>
+        <h2>Fulmen</h2>
+        <p class="note">Thunderbolt. F-35-class air-launched concept. Public page: name, class, stencil, and which analysis files exist. No seeker or payload layout on this site.</p>
+        <div class="specs">
+          <div><i>Stencil</i><b>FLM</b></div>
+          <div><i>Class</i><b>Air launched</b></div>
+          <div><i>Meaning</i><b>Thunderbolt</b></div>
+          <div><i>Status</i><b>Concept</b></div>
+        </div>
       </div>
+      <div>
+        <iframe class="chart" src="charts/cfd-aero.html" title="Fulmen CFD placeholder"></iframe>
+        <div class="row"><a class="btn" href="data/cfd-force.csv" download>Download CFD CSV</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pilum">
+    <div class="wrap sys">
+      <div>
+        <div class="kicker">PLM · radio: Pilum from the guns</div>
+        <h2>Pilum</h2>
+        <p class="note">Heavy javelin. 155-class ramjet-round concept. Show heating and force coefficients here when your CBAERO and CFD runs are exported.</p>
+        <div class="specs">
+          <div><i>Stencil</i><b>PLM</b></div>
+          <div><i>Class</i><b>155 artillery</b></div>
+          <div><i>Meaning</i><b>Heavy javelin</b></div>
+          <div><i>Status</i><b>Concept</b></div>
+        </div>
+      </div>
+      <div>
+        <iframe class="chart" src="charts/cbaero-heat.html" title="Pilum heating placeholder"></iframe>
+        <div class="row"><a class="btn" href="data/cbaero-heat.csv" download>Download CBAERO CSV</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contus">
+    <div class="wrap sys">
+      <div>
+        <div class="kicker">CTS · radio: Contus off the rails</div>
+        <h2>Contus</h2>
+        <p class="note">Heavy lance. Cell-launched air-breather concept. Two-handed, hits from a distance, does not come back. Canister marking: CTS. Say Vespasian Contus on slides.</p>
+        <div class="specs">
+          <div><i>Stencil</i><b>CTS</b></div>
+          <div><i>Class</i><b>VLS</b></div>
+          <div><i>Meaning</i><b>Heavy lance</b></div>
+          <div><i>Status</i><b>Concept</b></div>
+        </div>
+      </div>
+      <div>
+        <iframe class="chart" src="charts/cfd-aero.html" title="Contus CFD placeholder"></iframe>
+        <div class="row"><a class="btn" href="data/cfd-force.csv" download>Download CFD CSV</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="aquila">
+    <div class="wrap sys">
+      <div>
+        <div class="kicker">AQL · radio: Aquila in the stack</div>
+        <h2>Aquila</h2>
+        <p class="note">Eagle. The aircraft that returns. UAS concept. Structures case sits in the FEA plot until you replace the CSV with your spar or bulkhead run.</p>
+        <div class="specs">
+          <div><i>Stencil</i><b>AQL</b></div>
+          <div><i>Class</i><b>UAS</b></div>
+          <div><i>Meaning</i><b>Eagle</b></div>
+          <div><i>Status</i><b>Concept</b></div>
+        </div>
+      </div>
+      <div>
+        <iframe class="chart" src="charts/fea-spar.html" title="Aquila FEA placeholder"></iframe>
+        <div class="row"><a class="btn" href="data/fea-spar.csv" download>Download FEA CSV</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="vigil">
+    <div class="wrap">
+      <div class="kicker">Software</div>
+      <h2>Vigil is the picture.</h2>
+      <p class="note">Vigil stays off the airframes. If a fifth word is needed, it is the software: the common picture around Fulmen, Pilum, Contus, and Aquila. This block is a stub until you have screenshots.</p>
     </div>
   </section>
 
   <section id="analysis">
     <div class="wrap stack">
       <div>
-        <div class="kicker">02 — Analysis suite</div>
-        <h2>Plots from the stack you named</h2>
-        <p class="note">These charts are labeled placeholders. Swap the HTML/CSV with exports from your real CFD, CBAERO, and FEA cases. Same filenames = no code edits.</p>
+        <div class="kicker">Data</div>
+        <h2>How plots get on the page.</h2>
+        <p class="note">Keep the filenames. Export CSV from the solver. Overwrite the file in /data. If the column names change, edit the matching HTML in /charts or write a new Plotly export over that file.</p>
       </div>
       <div>
-        <h3 class="caps" style="margin-bottom:10px">CFD — force coefficients vs Mach</h3>
-        <p class="note" style="margin-bottom:12px">CL and CD at alpha = 4 deg. Hover / zoom. Data: cfd-force.csv</p>
-        <iframe class="chart" src="cfd-aero.html" title="CFD coefficients"></iframe>
+        <h3>CFD</h3>
+        <p class="note" style="margin:8px 0 12px">Force coefficients vs Mach. File: data/cfd-force.csv · view: charts/cfd-aero.html</p>
+        <iframe class="chart" src="charts/cfd-aero.html" title="CFD"></iframe>
       </div>
       <div>
-        <h3 class="caps" style="margin-bottom:10px">CBAERO — aeroheating vs time</h3>
-        <p class="note" style="margin-bottom:12px">Nose stagnation and leading-edge heat flux along a notional trajectory. Data: cbaero-heat.csv</p>
-        <iframe class="chart" src="cbaero-heat.html" title="CBAERO heating"></iframe>
+        <h3>CBAERO</h3>
+        <p class="note" style="margin:8px 0 12px">Heat flux vs time. File: data/cbaero-heat.csv · view: charts/cbaero-heat.html</p>
+        <iframe class="chart" src="charts/cbaero-heat.html" title="CBAERO"></iframe>
       </div>
       <div>
-        <h3 class="caps" style="margin-bottom:10px">FEA — spar von Mises</h3>
-        <p class="note" style="margin-bottom:12px">+3.0 g pull-up vs allowable. Data: fea-spar.csv</p>
-        <iframe class="chart" src="fea-spar.html" title="FEA spar stress"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <section id="data">
-    <div class="wrap">
-      <div class="kicker">03 — Downloads</div>
-      <h2>Run files</h2>
-      <p class="note">Publish coefficients, heat-flux histories, and stress tables. Do not upload ITAR-controlled geometry, meshes, or detailed munition performance.</p>
-      <div class="row">
-        <a class="btn" href="cfd-force.csv" download>cfd-force.csv</a>
-        <a class="btn" href="cbaero-heat.csv" download>cbaero-heat.csv</a>
-        <a class="btn" href="fea-spar.csv" download>fea-spar.csv</a>
+        <h3>FEA</h3>
+        <p class="note" style="margin:8px 0 12px">Spar stress vs span. File: data/fea-spar.csv · view: charts/fea-spar.html</p>
+        <iframe class="chart" src="charts/fea-spar.html" title="FEA"></iframe>
       </div>
     </div>
   </section>
 
   <footer class="wrap">
-    <span>Fraijo Laboratory · concept studies</span>
-    <a href="https://github.com/danielfraijo">github.com/danielfraijo</a>
+    <span>Vespasian · concept studies</span>
+    <span>FLM · PLM · CTS · AQL · VGL</span>
   </footer>
+
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="js/viewer.js"></script>
 </body>
 </html>
