@@ -1,1 +1,0 @@
-import{n as e}from"./with-selector-DN3lmfWr.js";import{k as t}from"./index-LZMGUpYl.js";var n=e();function r({status:e,className:r}){return(0,n.jsxs)(`span`,{className:t(`inline-flex items-center gap-2 font-mono text-xs uppercase tracking-label text-mist`,r),children:[(0,n.jsx)(`span`,{className:`size-1.5 rounded-full bg-ink`,"aria-hidden":`true`}),e]})}export{r as t};
